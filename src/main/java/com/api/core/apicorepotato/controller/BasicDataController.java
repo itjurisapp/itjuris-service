@@ -1,19 +1,28 @@
 package com.api.core.apicorepotato.controller;
 
 import com.api.core.apicorepotato.api.BasicDatasApi;
-import com.api.core.apicorepotato.model.ApiBasicDatasCodeTO;
-import com.api.core.apicorepotato.model.ApiBasicDatasTO;
-import com.api.core.apicorepotato.model.ApiResponseBasicDatasTO;
-import com.api.core.apicorepotato.model.ApiUpdateBasicDatasTO;
+import com.api.core.apicorepotato.model.*;
+import com.api.core.apicorepotato.repository.BasicDataRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 
 import javax.validation.Valid;
 
+import static org.springframework.http.HttpStatus.CREATED;
+
 public class BasicDataController extends BaseController implements BasicDatasApi {
+
+    @Autowired
+    BasicDataRepository basicDataRepository;
 
     @Override
     public ResponseEntity<ApiBasicDatasCodeTO> createBasicDatas(@Valid ApiBasicDatasTO newBasicDatas) {
-        return null;
+
+        BasicDataModel.builder()
+                .proceduralClass(newBasicDatas.getProceduralClass())
+                .build();
+
+        return new ResponseEntity<>(CREATED);
     }
 
     @Override
