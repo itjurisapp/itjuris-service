@@ -1,2 +1,3 @@
-# itjuris-service
-Backend da aplicação Spring boot
+# api-core-rest
+
+API Rest with Spring Boot, RabbitMQ and MongoDB
