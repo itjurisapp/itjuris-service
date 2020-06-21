@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  version: 0.0.1
+  version: 0.0.4
   title: Core API
   description: 'Service IT Juris.'
   contact:
@@ -183,6 +183,225 @@ paths:
           schema:
             $ref: '#/definitions/ErrorModel'
 
+  /basicDatas:
+    post:
+      tags:
+        - Basic Datas
+      summary: Create new basicDatas
+      description: 'Create new basicDatas.'
+      operationId: createBasicDatas
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: newBasicDatas
+          description: data new basicDatas
+          required: true
+          schema:
+            $ref: '#/definitions/BasicDatas'
+      responses:
+
+        '201':
+          description: Create new resource
+          schema:
+            $ref: '#/definitions/BasicDatasCode'
+        '401':
+          description: Authorization Failed
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Document not found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      security:
+        - OauthSecurity:
+            - "bearer"
+    get:
+      tags:
+        - Basic Datas
+      summary: Gets all BasicDatas
+      description: 'get a BasicDatas'
+      operationId: getbasicDatasos
+      produces:
+        - application/json
+      security:
+        - OauthSecurity:
+            - bearer
+
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: '#/definitions/ResponseBasicDatas'
+        '401':
+          description: Authorization Failed
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Document not found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        default:
+          description: Unexpected Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+  /basicDatas/{number}:
+    get:
+      tags:
+        - Basic Datas
+      summary: Gets a basicDatas
+      description: 'get a basicDatas'
+      operationId: getBasicDatas
+      produces:
+        - application/json
+      security:
+        - OauthSecurity:
+            - bearer
+      parameters:
+        - name: number
+          in: path
+          description: basicDatas number
+          required: true
+          type: string
+          x-example: '000001'
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: '#/definitions/ResponseBasicDatas'
+        '401':
+          description: Authorization Failed
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Document not found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        default:
+          description: Unexpected Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+
+
+    put:
+      tags:
+        - Basic Datas
+      summary: Update a basicDatas
+      description: 'get a basicDatas'
+      operationId: updateBasicDatas
+      produces:
+        - application/json
+      security:
+        - OauthSecurity:
+            - bearer
+      parameters:
+        - name: number
+          in: path
+          description: basicDatas number
+          required: true
+          type: string
+          x-example: 'XPTO'
+        - name: basicDatas
+          in: body
+          description: basicDatas date
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateBasicDatas'
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '422':
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '500':
+          description: Internal error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        default:
+          description: Unexpected Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+
+    delete:
+      tags:
+        - Basic Datas
+      summary: Update a basicDatas
+      description: 'get a basicDatas'
+      operationId: deleteBasicDatas
+      produces:
+        - application/json
+      security:
+        - OauthSecurity:
+            - bearer
+      parameters:
+        - name: number
+          in: path
+          description: basicDatas number
+          required: true
+          type: string
+          x-example: 'XPTO'
+        - name: basicDatas
+          in: body
+          description: basicDatas date
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateBasicDatas'
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '422':
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '500':
+          description: Internal error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        default:
+          description: Unexpected Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
 
 securityDefinitions:
   OauthSecurity:
@@ -197,6 +416,106 @@ security:
       - bearer
 
 definitions:
+
+  BasicDatas:
+    description: Object Process
+    type: object
+
+    properties:
+      proceduralClass:
+        type: integer
+        example: 123
+        description: Name of Process
+      codeLocation:
+        type: integer
+        example: 123
+        description: Name of Process
+      competence:
+        type: integer
+        example: 123
+        description: Name of Process
+      linkedProcess:
+        type: string
+        example: cnj
+        description: Name of Process
+      BindingProcessModality:
+        type: string
+        example: cnj
+        description: Name of Process
+      priority:
+        type: string
+        example: cnj
+        description: Name of Process
+      lawsuitValue:
+        type: integer
+        example: cnj
+        description: Name of Process
+      legalAssistance:
+        type: boolean
+        example: true
+        description: Name of Process
+      secrecyLevel:
+        type: integer
+        example: cnj
+        description: Name of Process
+      dateAjuizamento:
+        type: string
+        example: cnj
+        description: Name of Process
+      otherParameter:
+        type: string
+        example: cnj
+        description: Name of Process
+
+
+  UpdateBasicDatas:
+    description: Object Process
+    type: object
+    properties:
+      proceduralClass:
+        type: integer
+        example: 123
+        description: Name of Process
+      codeLocation:
+        type: integer
+        example: 123
+        description: Name of Process
+      competence:
+        type: integer
+        example: 123
+        description: Name of Process
+      linkedProcess:
+        type: string
+        example: cnj
+        description: Name of Process
+      BindingProcessModality:
+        type: string
+        example: cnj
+        description: Name of Process
+      priority:
+        type: string
+        example: cnj
+        description: Name of Process
+      lawsuitValue:
+        type: integer
+        example: cnj
+        description: Name of Process
+      legalAssistance:
+        type: boolean
+        example: true
+        description: Name of Process
+      secrecyLevel:
+        type: integer
+        example: cnj
+        description: Name of Process
+      dateAjuizamento:
+        type: string
+        example: cnj
+        description: Name of Process
+      otherParameter:
+        type: string
+        example: cnj
+        description: Name of Process
 
   Process:
     description: Object Process
@@ -243,6 +562,64 @@ definitions:
         items:
           $ref: '#/definitions/ProcessResponse'
 
+  ResponseBasicDatas:
+    type: object
+    required:
+      - BasicDatas
+    properties:
+      BasicDatas:
+        type: array
+        items:
+          $ref: '#/definitions/BasicDatasResponse'
+
+  BasicDatasResponse:
+    description: Object Process
+    type: object
+    properties:
+      proceduralClass:
+        type: integer
+        example: 123
+        description: Name of Process
+      codeLocation:
+        type: integer
+        example: 123
+        description: Name of Process
+      competence:
+        type: integer
+        example: 123
+        description: Name of Process
+      linkedProcess:
+        type: string
+        example: cnj
+        description: Name of Process
+      BindingProcessModality:
+        type: string
+        example: cnj
+        description: Name of Process
+      priority:
+        type: string
+        example: cnj
+        description: Name of Process
+      lawsuitValue:
+        type: integer
+        example: cnj
+        description: Name of Process
+      legalAssistance:
+        type: boolean
+        example: true
+        description: Name of Process
+      secrecyLevel:
+        type: integer
+        example: cnj
+        description: Name of Process
+      dateAjuizamento:
+        type: string
+        example: cnj
+        description: Name of Process
+      otherParameter:
+        type: string
+        example: cnj
+        description: Name of Process
 
   ProcessResponse:
     description: Process data
@@ -325,6 +702,10 @@ definitions:
       message:
         type: string
 
+
+
+  BasicDatasCode:
+    description: Process data
 
   ProcessCode:
     description: Process data
