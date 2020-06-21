@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  version: 0.0.1
+  version: 0.0.4
   title: Core API
   description: 'Service IT Juris.'
   contact:
