@@ -229,7 +229,7 @@ paths:
         - Basic Datas
       summary: Gets all BasicDatas
       description: 'get a BasicDatas'
-      operationId: getbasicDatasos
+      operationId: getBasicDatasAll
       produces:
         - application/json
       security:

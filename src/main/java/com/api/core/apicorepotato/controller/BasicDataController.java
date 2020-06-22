@@ -6,10 +6,15 @@ import com.api.core.apicorepotato.repository.BasicDataRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 
-import static org.springframework.http.HttpStatus.CREATED;
+import java.util.List;
+import java.util.Optional;
+
+import static com.api.core.apicorepotato.service.utils.ParserUtil.convertValue;
+import static org.springframework.http.HttpStatus.*;
 
 @RestController
 public class BasicDataController implements BasicDatasApi {
@@ -19,32 +24,42 @@ public class BasicDataController implements BasicDatasApi {
 
     @Override
     public ResponseEntity<ApiBasicDatasCodeTO> createBasicDatas(@Valid ApiBasicDatasTO newBasicDatas) {
-
-        BasicDataModel.builder()
-                .proceduralClass(newBasicDatas.getProceduralClass())
-
-                .build();
-
+        BasicDataModel model = convertValue(newBasicDatas, BasicDataModel.class);
+        basicDataRepository.save(model);
         return new ResponseEntity<>(CREATED);
     }
 
     @Override
-    public ResponseEntity<Void> deleteBasicDatas(String number, @Valid ApiUpdateBasicDatasTO basicDatas) {
-        return null;
-    }
-
-    @Override
     public ResponseEntity<ApiResponseBasicDatasTO> getBasicDatas(String number) {
-        return null;
+        Optional model = basicDataRepository.findById(number);
+
+        if (!model.isPresent()) throw new ResponseStatusException(NOT_FOUND, "Nenhum objeto encontrado!");
+
+        ApiResponseBasicDatasTO response = new ApiResponseBasicDatasTO();
+        ApiBasicDatasResponseTO to = convertValue(model.get(), ApiBasicDatasResponseTO.class);
+        response.addBasicDatasItem(to);
+
+        return new ResponseEntity<>(response, OK);
     }
 
     @Override
-    public ResponseEntity<ApiResponseBasicDatasTO> getbasicDatasos() {
-        return null;
+    public ResponseEntity<ApiResponseBasicDatasTO> getBasicDatasAll() {
+        List<BasicDataModel> models = basicDataRepository.findAll();
+        ApiResponseBasicDatasTO list = new ApiResponseBasicDatasTO();
+        models.forEach(m -> {
+            ApiBasicDatasResponseTO to = convertValue(m, ApiBasicDatasResponseTO.class);
+            list.addBasicDatasItem(to);
+        });
+        return new ResponseEntity<>(list, OK);
     }
 
     @Override
     public ResponseEntity<Void> updateBasicDatas(String number, @Valid ApiUpdateBasicDatasTO basicDatas) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<Void> deleteBasicDatas(String number, @Valid ApiUpdateBasicDatasTO basicDatas) {
         return null;
     }
 }
