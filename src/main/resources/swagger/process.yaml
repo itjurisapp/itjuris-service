@@ -422,47 +422,51 @@ definitions:
       proceduralClass:
         type: integer
         example: 123
+<<<<<<< HEAD
+        description: Número identificador da classe processual.
+=======
         description: class of Process
+>>>>>>> f7efb02746b39b8f4567785b9f29d3282dad9508
       codeLocation:
         type: integer
         example: 123
-        description: Name of Process
+        description: Códigos das seções/subseções (jurisdição) da instalação do PJe.
       competence:
         type: integer
         example: 123
-        description: Name of Process
+        description: Identificador da competência a que ele se destina.
       linkedProcess:
         type: string
         example: cnj
-        description: Name of Process
+        description: Elemento destinado a permitir a indicação da existência de um ou mais processos judiciais vinculados.
       BindingProcessModality:
         type: string
         example: cnj
-        description: Name of Process
+        description: Tipo de elemento destinado a permitir a identificação entre processos judiciais.
       priority:
         type: string
         example: cnj
-        description: Name of Process
+        description: Elemento destinado a permitir a identificação da existência de prioridades processuais não óbvias.
       lawsuitValue:
         type: integer
         example: cnj
-        description: Name of Process
+        description: Valor da relação jurídica. Não usar caracteres especiais, apenas números.
       legalAssistance:
         type: boolean
         example: true
-        description: Name of Process
+        description: Atributo que define se o processo terá assistência judiciária.
       secrecyLevel:
         type: integer
         example: cnj
-        description: Name of Process
+        description: Nível de sigilo a ser aplicado ao processo.
       dateAjuizamento:
         type: string
         example: cnj
-        description: Name of Process
+        description: data de autuação do processo.
       otherParameter:
         type: string
         example: cnj
-        description: Name of Process
+        description: Atributo genérico, podendo ser usado em diversas situações.
 
 
   UpdateBasicDatas:
