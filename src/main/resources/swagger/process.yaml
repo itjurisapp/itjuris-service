@@ -441,7 +441,7 @@ definitions:
         description: Tipo de elemento destinado a permitir a identificação entre processos judiciais.
       priority:
         type: string
-        example: cnj
+        example: ex
         description: Elemento destinado a permitir a identificação da existência de prioridades processuais não óbvias.
       lawsuitValue:
         type: integer
