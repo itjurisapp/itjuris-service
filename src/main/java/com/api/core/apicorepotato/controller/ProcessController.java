@@ -5,7 +5,6 @@ import com.api.core.apicorepotato.model.*;
 import com.api.core.apicorepotato.repository.ProcessRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,7 +14,7 @@ import static org.springframework.http.HttpStatus.CREATED;
 
 @CrossOrigin("*")
 @RestController
-public class ProcessController extends BaseController implements ProcessApi {
+public class ProcessController implements ProcessApi {
 
     @Autowired
     private ProcessRepository processRepository;

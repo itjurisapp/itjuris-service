@@ -19,7 +19,7 @@ import static org.springframework.http.HttpStatus.*;
 
 @CrossOrigin("*")
 @RestController
-public class ProductController extends BaseController implements ProductApi {
+public class ProductController implements ProductApi {
 
     @Autowired
     private ProductRepository productRepository;
