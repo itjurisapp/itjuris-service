@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  version: 0.0.4
+  version: 0.0.5
   title: Core API
   description: 'Service IT Juris.'
   contact:
@@ -297,8 +297,6 @@ paths:
           description: Unexpected Error
           schema:
             $ref: '#/definitions/ErrorModel'
-
-
     put:
       tags:
         - Basic Datas
@@ -350,7 +348,6 @@ paths:
           description: Unexpected Error
           schema:
             $ref: '#/definitions/ErrorModel'
-
     delete:
       tags:
         - Basic Datas
@@ -425,7 +422,7 @@ definitions:
       proceduralClass:
         type: integer
         example: 123
-        description: Name of Process
+        description: class of Process
       codeLocation:
         type: integer
         example: 123
