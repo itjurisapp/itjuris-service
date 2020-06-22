@@ -5,12 +5,14 @@ import com.api.core.apicorepotato.model.*;
 import com.api.core.apicorepotato.repository.BasicDataRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
 import static org.springframework.http.HttpStatus.CREATED;
 
-public class BasicDataController extends BaseController implements BasicDatasApi {
+@RestController
+public class BasicDataController implements BasicDatasApi {
 
     @Autowired
     BasicDataRepository basicDataRepository;
@@ -20,6 +22,7 @@ public class BasicDataController extends BaseController implements BasicDatasApi
 
         BasicDataModel.builder()
                 .proceduralClass(newBasicDatas.getProceduralClass())
+
                 .build();
 
         return new ResponseEntity<>(CREATED);

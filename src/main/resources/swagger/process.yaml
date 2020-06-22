@@ -183,11 +183,11 @@ paths:
           schema:
             $ref: '#/definitions/ErrorModel'
 
-  /basicDatas:
+  /basic-datas:
     post:
       tags:
         - Basic Datas
-      summary: Create new basicDatas
+      summary: Create new Basic Datas
       description: 'Create new basicDatas.'
       operationId: createBasicDatas
       produces:
@@ -257,7 +257,7 @@ paths:
           description: Unexpected Error
           schema:
             $ref: '#/definitions/ErrorModel'
-  /basicDatas/{number}:
+  /basic-datas/{number}:
     get:
       tags:
         - Basic Datas
