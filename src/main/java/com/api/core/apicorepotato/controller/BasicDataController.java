@@ -30,16 +30,11 @@ public class BasicDataController implements BasicDatasApi {
     }
 
     @Override
-    public ResponseEntity<ApiResponseBasicDatasTO> getBasicDatas(String number) {
+    public ResponseEntity<ApiBasicDatasResponseTO> getBasicDatas(String number) {
         Optional model = basicDataRepository.findById(number);
-
-        if (!model.isPresent()) throw new ResponseStatusException(NOT_FOUND, "Nenhum objeto encontrado!");
-
-        ApiResponseBasicDatasTO response = new ApiResponseBasicDatasTO();
+        validateModel(model);
         ApiBasicDatasResponseTO to = convertValue(model.get(), ApiBasicDatasResponseTO.class);
-        response.addBasicDatasItem(to);
-
-        return new ResponseEntity<>(response, OK);
+        return new ResponseEntity<>(to, OK);
     }
 
     @Override
@@ -55,11 +50,30 @@ public class BasicDataController implements BasicDatasApi {
 
     @Override
     public ResponseEntity<Void> updateBasicDatas(String number, @Valid ApiUpdateBasicDatasTO basicDatas) {
-        return null;
+        Optional model = basicDataRepository.findById(number);
+        validateModel(model);
+        BasicDataModel updateModel = convertValue(basicDatas, BasicDataModel.class);
+
+        ApiBasicDatasResponseTO to = convertValue(model.get(), ApiBasicDatasResponseTO.class);
+        updateModel.setProcessNumber(number);
+
+        basicDataRepository.save(updateModel);
+
+        return new ResponseEntity<>(OK);
     }
 
     @Override
     public ResponseEntity<Void> deleteBasicDatas(String number, @Valid ApiUpdateBasicDatasTO basicDatas) {
-        return null;
+        Optional model = basicDataRepository.findById(number);
+        validateModel(model);
+        BasicDataModel deleteModel = convertValue(basicDatas, BasicDataModel.class);
+        deleteModel.setId(number);
+        basicDataRepository.delete(deleteModel);
+
+        return new ResponseEntity<>(OK);
+    }
+
+    private void validateModel(Optional model){
+        if (!model.isPresent()) throw new ResponseStatusException(NOT_FOUND, "Nenhum objeto encontrado!");
     }
 }

@@ -280,7 +280,7 @@ paths:
         '200':
           description: Ok
           schema:
-            $ref: '#/definitions/ResponseBasicDatas'
+            $ref: '#/definitions/BasicDatasResponse'
         '401':
           description: Authorization Failed
           schema:
@@ -573,6 +573,10 @@ definitions:
     description: Object Process
     type: object
     properties:
+      id:
+        type: string
+        example: 123
+        description: unique code
       proceduralClass:
         type: integer
         example: 123
@@ -698,8 +702,6 @@ definitions:
         type: string
       message:
         type: string
-
-
 
   BasicDatasCode:
     description: Process data
