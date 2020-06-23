@@ -576,6 +576,10 @@ definitions:
     description: Object Process
     type: object
     properties:
+      id:
+        type: string
+        example: 123
+        description: unique code
       proceduralClass:
         type: integer
         example: 123

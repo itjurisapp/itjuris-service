@@ -13,6 +13,7 @@ import org.springframework.data.annotation.Id;
 public class BasicDataModel {
 
     @Id
+    private String id;
     private String processNumber;
     private Integer proceduralClass;
     private Integer codeLocation;
