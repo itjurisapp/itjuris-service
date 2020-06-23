@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  version: 0.0.1
+  version: 0.0.2
   title: Core API
   description: 'Service IT Juris.'
   contact:
@@ -280,7 +280,7 @@ paths:
         '200':
           description: Ok
           schema:
-            $ref: '#/definitions/ResponseBasicDatas'
+            $ref: '#/definitions/BasicDatasResponse'
         '401':
           description: Authorization Failed
           schema:
@@ -701,8 +701,6 @@ definitions:
         type: string
       message:
         type: string
-
-
 
   BasicDatasCode:
     description: Process data

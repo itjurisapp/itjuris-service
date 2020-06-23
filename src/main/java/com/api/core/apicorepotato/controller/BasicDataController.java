@@ -30,16 +30,11 @@ public class BasicDataController implements BasicDatasApi {
     }
 
     @Override
-    public ResponseEntity<ApiResponseBasicDatasTO> getBasicDatas(String number) {
+    public ResponseEntity<ApiBasicDatasResponseTO> getBasicDatas(String number) {
         Optional model = basicDataRepository.findById(number);
-
         if (!model.isPresent()) throw new ResponseStatusException(NOT_FOUND, "Nenhum objeto encontrado!");
-
-        ApiResponseBasicDatasTO response = new ApiResponseBasicDatasTO();
         ApiBasicDatasResponseTO to = convertValue(model.get(), ApiBasicDatasResponseTO.class);
-        response.addBasicDatasItem(to);
-
-        return new ResponseEntity<>(response, OK);
+        return new ResponseEntity<>(to, OK);
     }
 
     @Override
@@ -55,6 +50,10 @@ public class BasicDataController implements BasicDatasApi {
 
     @Override
     public ResponseEntity<Void> updateBasicDatas(String number, @Valid ApiUpdateBasicDatasTO basicDatas) {
+        Optional model = basicDataRepository.findById(number);
+        if (!model.isPresent()) throw new ResponseStatusException(NOT_FOUND, "Nenhum objeto encontrado!");
+
+        ApiBasicDatasResponseTO to = convertValue(model.get(), ApiBasicDatasResponseTO.class);
         return null;
     }
 
