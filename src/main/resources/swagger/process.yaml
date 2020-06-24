@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  version: 0.0.1
+  version: 0.0.5
   title: Core API
   description: 'Service IT Juris.'
   contact:
@@ -183,11 +183,11 @@ paths:
           schema:
             $ref: '#/definitions/ErrorModel'
 
-  /basicDatas:
+  /basic-datas:
     post:
       tags:
         - Basic Datas
-      summary: Create new basicDatas
+      summary: Create new Basic Datas
       description: 'Create new basicDatas.'
       operationId: createBasicDatas
       produces:
@@ -229,7 +229,7 @@ paths:
         - Basic Datas
       summary: Gets all BasicDatas
       description: 'get a BasicDatas'
-      operationId: getbasicDatasos
+      operationId: getBasicDatasAll
       produces:
         - application/json
       security:
@@ -257,7 +257,7 @@ paths:
           description: Unexpected Error
           schema:
             $ref: '#/definitions/ErrorModel'
-  /basicDatas/{number}:
+  /basic-datas/{number}:
     get:
       tags:
         - Basic Datas
@@ -280,7 +280,7 @@ paths:
         '200':
           description: Ok
           schema:
-            $ref: '#/definitions/ResponseBasicDatas'
+            $ref: '#/definitions/BasicDatasResponse'
         '401':
           description: Authorization Failed
           schema:
@@ -297,8 +297,6 @@ paths:
           description: Unexpected Error
           schema:
             $ref: '#/definitions/ErrorModel'
-
-
     put:
       tags:
         - Basic Datas
@@ -350,7 +348,6 @@ paths:
           description: Unexpected Error
           schema:
             $ref: '#/definitions/ErrorModel'
-
     delete:
       tags:
         - Basic Datas
@@ -425,47 +422,47 @@ definitions:
       proceduralClass:
         type: integer
         example: 123
-        description: Name of Process
+        description: Número identificador da classe processual.
       codeLocation:
         type: integer
         example: 123
-        description: Name of Process
+        description: Códigos das seções/subseções (jurisdição) da instalação do PJe.
       competence:
         type: integer
         example: 123
-        description: Name of Process
+        description: Identificador da competência a que ele se destina.
       linkedProcess:
         type: string
         example: cnj
-        description: Name of Process
+        description: Elemento destinado a permitir a indicação da existência de um ou mais processos judiciais vinculados.
       BindingProcessModality:
         type: string
         example: cnj
-        description: Name of Process
+        description: Tipo de elemento destinado a permitir a identificação entre processos judiciais.
       priority:
         type: string
         example: cnj
-        description: Name of Process
+        description: Elemento destinado a permitir a identificação da existência de prioridades processuais não óbvias.
       lawsuitValue:
         type: integer
         example: cnj
-        description: Name of Process
+        description: Valor da relação jurídica. Não usar caracteres especiais, apenas números.
       legalAssistance:
         type: boolean
         example: true
-        description: Name of Process
+        description: Atributo que define se o processo terá assistência judiciária.
       secrecyLevel:
         type: integer
         example: cnj
-        description: Name of Process
+        description: Nível de sigilo a ser aplicado ao processo.
       dateAjuizamento:
         type: string
         example: cnj
-        description: Name of Process
+        description: data de autuação do processo.
       otherParameter:
         type: string
         example: cnj
-        description: Name of Process
+        description: Atributo genérico, podendo ser usado em diversas situações.
 
 
   UpdateBasicDatas:
@@ -565,9 +562,9 @@ definitions:
   ResponseBasicDatas:
     type: object
     required:
-      - Process
+      - BasicDatas
     properties:
-      Process:
+      BasicDatas:
         type: array
         items:
           $ref: '#/definitions/BasicDatasResponse'
@@ -576,6 +573,10 @@ definitions:
     description: Object Process
     type: object
     properties:
+      id:
+        type: string
+        example: 123
+        description: unique code
       proceduralClass:
         type: integer
         example: 123
@@ -701,8 +702,6 @@ definitions:
         type: string
       message:
         type: string
-
-
 
   BasicDatasCode:
     description: Process data

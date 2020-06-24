@@ -1,20 +1,17 @@
-FROM docker-registry-default.apps.appcanvas.net/test/test-java11:latest
-
-LABEL MANTAINER="Exemple"
-
-# Environment variable
-ENV SPRING_LOGGING_LEVEL INFO
-ENV SPRING_PROFILE deploy
-ENV PORT 8080
-ENV JVM_XMS 512m
-ENV JVM_XMX 1024m
-
-# Add file to image on build
-ADD target/*.jar /app/app.jar
-ADD app.sh /
-
-RUN chmod 0755 /app.sh
-
-CMD /app.sh
-
-EXPOSE ${PORT}
+FROM openjdk:8-jre
+# Java variables
+ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
+ENV PATH $PATH:$JAVA_HOME/bin
+# Time variables
+ENV TIME_ZONE America/Sao_Paulo
+ENV TZ=$TIME_ZONE
+# Time configuration
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+RUN dpkg-reconfigure -f noninteractive tzdata
+# App
+CMD mkdir /app
+COPY target/*.jar /app/app.jar
+# Ports exposing
+EXPOSE 8080
+# Entry
+CMD java ${JAVA_OPTS} -jar /app/app.jar
